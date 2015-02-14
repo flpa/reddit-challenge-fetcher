@@ -1,0 +1,2 @@
+- generic methods for actually creating - to allow implementations for other languages?
+- for lisp impl: base as many things on quickproject as possible (look into templates)
