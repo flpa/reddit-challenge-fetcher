@@ -1,8 +1,8 @@
 * About
-reddit-challenge-fetcher is a Common Lisp utility intended to automate as many aspects of starting a solution for a Reddit *DailyProgrammer* challenge as possible.
+reddit-challenge-fetcher is a Common Lisp utility intended to automate as many aspects of starting a solution for a Reddit /DailyProgrammer/ challenge as possible.
 Planned features include:
-- Download challenge specifications via *cl-reddit*.
-- Create the project structure using *quickproject*.
+- Download challenge specifications via /cl-reddit/.
+- Create the project structure using /quickproject/.
 - Extract sample input/output to create test files (?)
 - Initialize the git repository (?)
 
