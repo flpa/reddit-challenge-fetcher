@@ -36,6 +36,14 @@
   (register-groups-bind (category) (*category-regex* " [Practical Exercise]")
     (is (equal "Practical Exercise" category))))
 
+(defparameter *name-regex* " (.*)")
+(test name-regex
+  (register-groups-bind (name) (*name-regex* " Fun")
+    (is (equal "Fun" name)))
+  (register-groups-bind (name) (*name-regex* 
+                                 " This will be [another] really great one!")
+    (is (equal "This will be [another] really great one!" name))))
+
 (defun split-title (title)
   "Split the TITLE string of a challenge into the various components and
    returns them as multple values.
@@ -47,9 +55,16 @@
   ;;todo: rename to extract-title-info
   ;;todo: another cl-ppcre method to directly return (not capture in local vars) ?
   ;;todo: extract year, month, day separately to combine them to a proper date?
-  (register-groups-bind (date number)
-                        ((concatenate 'string "^" *date-regex* *number-regex* *category-regex*) title)
-                        (values date number))
+  (register-groups-bind (date number category name)
+                        ((concatenate 'string 
+                                      "^" 
+                                      *date-regex* 
+                                      *number-regex* 
+                                      *category-regex* 
+                                      *name-regex* 
+                                      "$") 
+                         title)
+                        (values date number category name))
   )
 
 ;; TODO: override user agent?

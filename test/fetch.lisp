@@ -11,6 +11,6 @@
         (reddit-challenge-fetcher.fetch::split-title 
           "[2015-02-13] Challenge #201 [Hard] Mission Improbable")
         (is (equal "2015-02-13" date))
-        (is (equal "201" date))
-        (is (equal "Hard" date))
-        (is (equal "Mission Impropable" date))))
+        (is (equal "201" number))
+        (is (equal "Hard" category))
+        (is (equal "Mission Improbable" name))))
