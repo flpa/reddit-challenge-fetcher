@@ -4,7 +4,8 @@
   :author "Florian Patzl"
   :license "GPLv3"
   :depends-on (#:cl-reddit
-               #:quickproject)
+               #:quickproject
+	       #:cl-ppcre)
   :components ((:file "core")
                (:file "fetch")))
 
