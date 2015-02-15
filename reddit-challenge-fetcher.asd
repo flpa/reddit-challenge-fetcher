@@ -5,7 +5,8 @@
   :license "GPLv3"
   :depends-on (#:cl-reddit
                #:quickproject
-	       #:cl-ppcre)
+	       #:cl-ppcre
+	       #:fiveam);temporary
   :components ((:file "core")
                (:file "fetch")))
 
