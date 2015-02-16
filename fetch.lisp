@@ -81,5 +81,17 @@
 
 (test escape-name
   (is (equal "mission" (escape-name "Mission")))
-  (is (equal "mission-improbable" (escape-name "Mission Improbable")))
-  )
+  (is (equal "mission-improbable" (escape-name "Mission Improbable"))))
+
+(defparameter *author* "flpa <flpa.dev@zoho.com>")
+(defparameter *license* "Public Domain")
+
+(defparameter *solution-directory* "/tmp/sols/")
+
+(defun make-challenge-project (link)
+  (multiple-value-bind (date number category name) 
+                       (split-title (link-title link))
+    (let ((escaped-title (escape-name name)))
+      (make-project (merge-pathnames *solution-directory* 
+                                     (format nil "~d_~a" number escaped-title))
+                    :name escaped-title))))
