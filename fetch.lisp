@@ -4,6 +4,7 @@
   (:use #:cl
         #:cl-reddit
         #:cl-ppcre
+        #:quickproject
         #:5am))
 
 (in-package #:reddit-challenge-fetcher.fetch)
