@@ -65,8 +65,21 @@
                                       *name-regex* 
                                       "$") 
                          title)
-                        (values date number category name))
-  )
+                        (values date number category name)))
 
 ;; TODO: override user agent?
 
+;; prompt for project name 
+
+(defun escape-name (name)
+  "Escapes the name of a challenge so that it can be used as a system, package
+   and directory name.
+   That is:
+   - convert to lowercase
+   - replace blanks by dashes"
+  (regex-replace-all "\\s" (string-downcase name) "-"))
+
+(test escape-name
+  (is (equal "mission" (escape-name "Mission")))
+  (is (equal "mission-improbable" (escape-name "Mission Improbable")))
+  )
