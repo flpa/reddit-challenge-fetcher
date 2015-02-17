@@ -73,6 +73,18 @@
   ;;todo: rename to extract-title-info
   ;;todo: another cl-ppcre method to directly return (not capture in local vars) ?
   ;;todo: extract year, month, day separately to combine them to a proper date?
+  ;;TODO: real-world samples from hell:
+  ;;[Weekly #6] Python Tips and Tricks
+  ;;[Weekly #18] Holiday Code - a time of sharing
+  ;;[Weekly #7] Programming Tools -- The Editors
+  ;;[7/7/2014] Challenge #170 [Easy] Blackjack Checker
+  ;;[10/31/2014] Challenge #186 [Special] Code or Treat - Halloween 2014
+  ;;[MOD POST] New subreddit changes
+  ;;[05/10/13] Challenge #123 [Hard] Robot Jousting
+  ;;[5/19/2012] Challenge #54 [easy]
+  ;;[05/24/13] Challenge #123 [Hard] Snake-Fill
+  ;;[03/08/13] Challenge #120 [Hard] Bytelandian Exchange 3
+  ;;[7/9/2012] Challenge #74 [intermediate]
   (register-groups-bind (date number category name)
                         ((concatenate 'string 
                                       "^" 
@@ -112,3 +124,5 @@
       (make-project (merge-pathnames *solution-directory* 
                                      (format nil "~d_~a" number escaped-title))
                     :name escaped-title))))
+
+
