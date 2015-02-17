@@ -15,13 +15,22 @@
 (defparameter *sample-challenge* (first (get-subreddit-new *subreddit*))
   "Challenge LINK object for test purposes.")
 
-(defparameter *date-regex* "\\[(\\d{4}-\\d{2}-\\d{2})\\]" ; [YYYY-MM-DD] 
+(defparameter *date-regex* "\\[([^\\]]+)\\]"
+  ;;TODO: better solution only allowing digits
   "Regular expression for parsing the date portion of a challenge title, i.e.
    the date enclossed in brackets.")
 
 (test date-regex
-  (register-groups-bind (date) (*date-regex* "[1234-34-12]")
-    (is (equal "1234-34-12" date))))
+  ;;TODO: general workaround for group matching
+  (flet ((dotest (input output)
+           (if (scan *date-regex* input)
+             (register-groups-bind (date) (*date-regex* input)
+               (is (equal output date)))
+             (fail (format nil "~a does not even match the regex!" input)))))
+    (dotest "[2014-02-12]" "2014-02-12") ; new pattern
+    (dotest "[10/31/2014]" "10/31/2014") ; old twodigit month 
+    (dotest "[05/31/2014]" "05/31/2014") ; old twodigit singledigit month 
+    (dotest "[7/7/2014]" "7/7/2014"))) ; old singledigit month 
 
 (defparameter *number-regex* " Challenge #(\\d+)"
   "Regular expression for parsing the number of a challenge in a string like
