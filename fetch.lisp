@@ -9,15 +9,23 @@
 
 (in-package #:reddit-challenge-fetcher.fetch)
 
-(defparameter *sample-challenge* (first (get-subreddit-new "dailyprogrammer")))
+(defparameter *subreddit* "dailyprogrammer" 
+  "The name of the DailyProgrammer subreddit.")
 
-;; regex: YYYY-MM-DD enclosed in brackets
-(defparameter *date-regex* "\\[(\\d{4}-\\d{2}-\\d{2})\\]")
+(defparameter *sample-challenge* (first (get-subreddit-new *subreddit*))
+  "Challenge LINK object for test purposes.")
+
+(defparameter *date-regex* "\\[(\\d{4}-\\d{2}-\\d{2})\\]" ; [YYYY-MM-DD] 
+  "Regular expression for parsing the date portion of a challenge title, i.e.
+   the date enclossed in brackets.")
+
 (test date-regex
   (register-groups-bind (date) (*date-regex* "[1234-34-12]")
     (is (equal "1234-34-12" date))))
 
-(defparameter *number-regex* " Challenge #(\\d+)")
+(defparameter *number-regex* " Challenge #(\\d+)"
+  "Regular expression for parsing the number of a challenge in a string like
+   ' Challenge #200'.")
 (test number-regex
   (register-groups-bind (number) (*number-regex* " Challenge #1")
     (is (equal "1" number))) 
@@ -90,7 +98,7 @@
 
 (defun make-challenge-project (link)
   (multiple-value-bind (date number category name) 
-                       (split-title (link-title link))
+    (split-title (link-title link))
     (let ((escaped-title (escape-name name)))
       (make-project (merge-pathnames *solution-directory* 
                                      (format nil "~d_~a" number escaped-title))
